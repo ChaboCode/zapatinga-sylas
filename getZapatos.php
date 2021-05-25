@@ -1,4 +1,6 @@
 <?php
+include('constants.php');
+
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET');
 header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, X-Requested-With');
@@ -32,13 +34,7 @@ switch($select) {
 		break;
 }
 
-
 // Step 2. Connect to database
-$servername = 'localhost';
-$username = 'zapatinga_server';
-$password = 'zapatinga';
-$db = 'zapatinga';
-
 $con = new mysqli($servername, $username, $password, $db);
 
 if ($con->connect_error) {
@@ -46,7 +42,7 @@ if ($con->connect_error) {
 }
 
 // Step 3. Query
-$sql = "SELECT $sql_select FROM zapatos ORDER BY $sql_order";
+$sql = "SELECT $sql_select FROM zapatos ORDER BY $sql_order LIMIT 30";
 $result = $con->query($sql);
 
 // Step 4. Generate and return results

@@ -1,0 +1,2 @@
+SELECT * FROM zapatos
+JOIN seasons ON zapatos.season = seasons.season_id;
