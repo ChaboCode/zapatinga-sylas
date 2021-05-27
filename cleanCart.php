@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     // Step 4. Fancy SQL subquery shit for getting
     // the cart items from the username
-    $sql = "DELETE FROM cart WHERE user_id = (SELECT user_id from users WHERE user_name LIKE '%$sql_username%')"
+    $sql = "DELETE FROM cart WHERE user_id = (SELECT user_id from users WHERE user_name LIKE '%$sql_username%')";
     $result = $con->query($sql);
 
     if ($result == false) {
