@@ -1,10 +1,11 @@
 <?php
-include_once('vendor/autload.php');
-include_once('constants.php');
+include_once('vendor/autoload.php');
 
 use Firebase\JWT\JWT;
 
 function isValidJWT($jwt) {
+    include('./constants.php');
+
     try {
         $decoded_jwt = JWT::decode($jwt, $jwt_secret, array('HS256'));
 	return true;

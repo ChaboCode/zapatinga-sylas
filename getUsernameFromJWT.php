@@ -3,6 +3,7 @@ include_once('vendor/autoload.php');
 include('constants.php');
 
 use Firebase\JWT\JWT;
+use FIrebase\JWT\ExpiredException;
 
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET');
@@ -14,11 +15,11 @@ $jwt = $_GET['jwt'];
 
 // Step 2. Retrive username from JWT
 try {
-    $raw_jwt = json_decode($jwt);
-    echo (JWT::decode($jwt, $jwt_secret, array('HS256'))->username);
-} catch (Exception $e) {
-	print_r($e);
+    $decoded_jwt = JWT::decode($jwt, $jwt_secret, array('HS256'));
+    echo $decoded_jwt->username;
+} catch (ExpiredException $e) {
+    echo "Expired token";
+    http_response_code(400);
 }
-
 
 ?>
