@@ -10,6 +10,7 @@ header("Access-Control-Allow-Credentials: true");
 header("Content-Type: application/json");
 
 use Firebase\JWT\JWT;
+use Firebase\JWT\ExpiredException;
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     
@@ -18,8 +19,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $zapato_id = $_REQUEST["zapato_id"];
 
     // Step 2. Validate JWT
-    if (!isValidJWT($jwt)) {
-        die("Invalid JWT");
+    try {
+        if (!isValidJWT($jwt)) {
+            die("Invalid JWT");
+        }
+    } catch (ExpiredException $e) {
+        echo "Expired";
+        die();
     }
 
     // Step 3. Retrive username from JWT
@@ -43,6 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         "%'), (SELECT id FROM zapatos WHERE id = " .
         $zapato_id .
         "), 1)";
+    echo $sql;
     $result = $con->query($sql);
     if ($result == false) {
         die($con->error);
