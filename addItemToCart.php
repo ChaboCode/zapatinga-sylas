@@ -49,7 +49,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         "%'), (SELECT id FROM zapatos WHERE id = " .
         $zapato_id .
         "), 1)";
-    echo $sql;
     $result = $con->query($sql);
     if ($result == false) {
         die($con->error);
