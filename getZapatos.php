@@ -8,6 +8,11 @@ header('Content-Type: application/json');
 
 // Step 1: Generate SQL parameters
 $season = $_GET['season'];
+if ($season) {
+    $sql_season = "WHERE zapatos.season = $season";
+} else{
+    $sql_season = "";
+}
 
 // Step 2. Connect to database
 $con = new mysqli($servername, $username, $password, $db);
@@ -17,7 +22,7 @@ if ($con->connect_error) {
 }
 
 // Step 3. Query
-$sql = "SELECT * FROM zapatos WHERE zapatos.season = $season ORDER BY publish_date DESC LIMIT 30";
+$sql = "SELECT * FROM zapatos $sql_season ORDER BY publish_date DESC LIMIT 30";
 $result = $con->query($sql);
 
 // Step 4. Generate and return results
