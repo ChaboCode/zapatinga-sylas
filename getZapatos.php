@@ -17,7 +17,7 @@ if ($con->connect_error) {
 }
 
 // Step 3. Query
-$sql = "SELECT * FROM zapatos WHERE zapatos.id = $season ORDER BY publish_date DESC LIMIT 30";
+$sql = "SELECT * FROM zapatos WHERE zapatos.season_id = $season ORDER BY publish_date DESC LIMIT 30";
 $result = $con->query($sql);
 
 // Step 4. Generate and return results
