@@ -4,9 +4,9 @@ include_once "constants.php";
 include_once "validateToken.php";
 
 header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods", "POST, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type");
-header("Access-Control-Allow-Credentials", "true");
+header("Access-Control-Allow-Methods: POST, OPTIONS");
+header("Access-Control-Allow-Headers: *");
+header("Access-Control-Allow-Credentials: true");
 header("Content-Type: application/json");
 
 use Firebase\JWT\JWT;
